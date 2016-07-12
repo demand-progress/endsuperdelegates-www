@@ -173,17 +173,17 @@ header .headlines h1 {
     position: relative;
     z-index: 99;
 }
-.action.anchored-to-top {
+.action[status="anchored-to-top"] {
     right: auto !important;
     top: auto;
 }
-.action.anchored-to-bottom {
+.action[status="anchored-to-bottom"] {
     bottom: 32px;
     position: absolute;
     right: 0 !important;
     top: auto;
 }
-.action.floating {
+.action[status="floating"] {
     position: fixed;
     top: 16px;
 }

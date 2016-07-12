@@ -43,34 +43,28 @@ function onResize(e) {
     $('.action').css('right', right);
 }
 
+let oldFormStatus = '';
 function onScroll(e) {
     const containerHeight = $('.petition-and-form-wrapper .outer-padding').outerHeight();
     const formHeight = $('.action').outerHeight();
     const petitionOffset = $('.petition').offset();
     const scrollTop = $(window).scrollTop();
     const suggestedPadding = 16;
-
-    if (scrollTop <= petitionOffset.top) {
-        $('.action')
-            .removeClass('anchored-to-bottom')
-            .removeClass('floating')
-            .addClass('anchored-to-top');
-        return;
-    }
-
     const maxTop = containerHeight - formHeight - suggestedPadding * 3;
-    if (maxTop < scrollTop - petitionOffset.top) {
-        $('.action')
-            .removeClass('anchored-to-top')
-            .removeClass('floating')
-            .addClass('anchored-to-bottom');
-        return;
+
+    let newFormStatus = '';
+    if (scrollTop <= petitionOffset.top - suggestedPadding) {
+        newFormStatus = 'anchored-to-top';
+    } else if (maxTop < scrollTop - petitionOffset.top) {
+        newFormStatus = 'anchored-to-bottom';
+    } else {
+        newFormStatus = 'floating';
     }
 
-    $('.action')
-        .removeClass('anchored-to-top')
-        .removeClass('anchored-to-bottom')
-        .addClass('floating');
+    if (newFormStatus !== oldFormStatus) {
+        $('.action').attr('status', newFormStatus);
+        oldFormStatus = newFormStatus;
+    }
 }
 
 function setupSignatureForm() {

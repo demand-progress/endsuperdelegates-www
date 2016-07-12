@@ -1199,25 +1199,28 @@
 	    $('.action').css('right', right);
 	}
 
+	var oldFormStatus = '';
 	function onScroll(e) {
 	    var containerHeight = $('.petition-and-form-wrapper .outer-padding').outerHeight();
 	    var formHeight = $('.action').outerHeight();
 	    var petitionOffset = $('.petition').offset();
 	    var scrollTop = $(window).scrollTop();
 	    var suggestedPadding = 16;
-
-	    if (scrollTop <= petitionOffset.top) {
-	        $('.action').removeClass('anchored-to-bottom').removeClass('floating').addClass('anchored-to-top');
-	        return;
-	    }
-
 	    var maxTop = containerHeight - formHeight - suggestedPadding * 3;
-	    if (maxTop < scrollTop - petitionOffset.top) {
-	        $('.action').removeClass('anchored-to-top').removeClass('floating').addClass('anchored-to-bottom');
-	        return;
+
+	    var newFormStatus = '';
+	    if (scrollTop <= petitionOffset.top - suggestedPadding) {
+	        newFormStatus = 'anchored-to-top';
+	    } else if (maxTop < scrollTop - petitionOffset.top) {
+	        newFormStatus = 'anchored-to-bottom';
+	    } else {
+	        newFormStatus = 'floating';
 	    }
 
-	    $('.action').removeClass('anchored-to-top').removeClass('anchored-to-bottom').addClass('floating');
+	    if (newFormStatus !== oldFormStatus) {
+	        $('.action').attr('status', newFormStatus);
+	        oldFormStatus = newFormStatus;
+	    }
 	}
 
 	function setupSignatureForm() {
