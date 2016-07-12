@@ -1183,16 +1183,16 @@
 
 
 	function setupStickyForm() {
-	    // const scrollCallbackDelay = 32;
-	    // let scrollTimeout = null;
-	    // $(window).on('scroll', e => {
-	    //     clearTimeout(scrollTimeout);
-	    //     scrollTimeout = setTimeout(f => {
-	    //         onScroll(e);
-	    //     }, scrollCallbackDelay);
-	    // });
-	    $(window).on('scroll', onScroll);
+	    var scrollCallbackDelay = 64;
+	    var scrollTimeout = null;
+	    $(window).on('scroll resize', function (e) {
+	        clearTimeout(scrollTimeout);
+	        scrollTimeout = setTimeout(function (f) {
+	            onScroll(e);
+	        }, scrollCallbackDelay);
+	    });
 	    $(window).trigger('scroll');
+	    // $(window).on('scroll resize', onScroll);
 	}
 
 	function onScroll(e) {
@@ -1275,10 +1275,6 @@
 	        readyToSubmit = true;
 	        $signatureForm.submit();
 	    });
-
-	    if (!navigator.userAgent.match(/mobile/i)) {
-	        $('#name').focus();
-	    }
 	}
 
 	function updateDisclaimer() {
