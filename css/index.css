@@ -163,7 +163,6 @@ header .headlines h1 {
     float: right;
     margin: 0 auto;
     max-width: 310px;
-    position: relative;
 }
 .action {
     background-color: #0a2f51;
@@ -172,12 +171,21 @@ header .headlines h1 {
     max-width: 310px;
     padding: 24px 0 22px 0;
     position: relative;
-    top: 0;
-    right: 0;
     z-index: 99;
+}
+.action.anchored-to-top {
+    right: auto !important;
+    top: auto;
+}
+.action.anchored-to-bottom {
+    bottom: 32px;
+    position: absolute;
+    right: 0 !important;
+    top: auto;
 }
 .action.floating {
     position: fixed;
+    top: 16px;
 }
 .action h2 {
     color: #f1f1f1;

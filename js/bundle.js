@@ -1188,7 +1188,6 @@
 
 	    $(window).trigger('scroll');
 	    $(window).trigger('resize');
-	    $('.action').addClass('floating');
 	}
 
 	function onResize(e) {
@@ -1207,19 +1206,18 @@
 	    var scrollTop = $(window).scrollTop();
 	    var suggestedPadding = 16;
 
-	    var maxTop = containerHeight - formHeight - suggestedPadding * 3;
-
-	    var targetTop = scrollTop - petitionOffset.top;
-
-	    if (targetTop < -suggestedPadding) {
-	        targetTop *= -1;
-	    } else if (targetTop > maxTop) {
-	        targetTop = maxTop - targetTop + suggestedPadding - 2;
-	    } else {
-	        targetTop = suggestedPadding;
+	    if (scrollTop <= petitionOffset.top) {
+	        $('.action').removeClass('anchored-to-bottom').removeClass('floating').addClass('anchored-to-top');
+	        return;
 	    }
 
-	    $('.action').css('top', targetTop);
+	    var maxTop = containerHeight - formHeight - suggestedPadding * 3;
+	    if (maxTop < scrollTop - petitionOffset.top) {
+	        $('.action').removeClass('anchored-to-top').removeClass('floating').addClass('anchored-to-bottom');
+	        return;
+	    }
+
+	    $('.action').removeClass('anchored-to-top').removeClass('anchored-to-bottom').addClass('floating');
 	}
 
 	function setupSignatureForm() {

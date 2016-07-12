@@ -32,7 +32,6 @@ function setupStickyForm() {
 
     $(window).trigger('scroll');
     $(window).trigger('resize');
-    $('.action').addClass('floating');
 }
 
 function onResize(e) {
@@ -51,19 +50,27 @@ function onScroll(e) {
     const scrollTop = $(window).scrollTop();
     const suggestedPadding = 16;
 
-    const maxTop = containerHeight - formHeight - suggestedPadding * 3;
-
-    let targetTop = scrollTop - petitionOffset.top;
-
-    if (targetTop < -suggestedPadding) {
-        targetTop *= -1;
-    } else if (targetTop > maxTop) {
-        targetTop = maxTop - targetTop + suggestedPadding - 2;
-    } else {
-        targetTop = suggestedPadding;
+    if (scrollTop <= petitionOffset.top) {
+        $('.action')
+            .removeClass('anchored-to-bottom')
+            .removeClass('floating')
+            .addClass('anchored-to-top');
+        return;
     }
 
-    $('.action').css('top', targetTop);
+    const maxTop = containerHeight - formHeight - suggestedPadding * 3;
+    if (maxTop < scrollTop - petitionOffset.top) {
+        $('.action')
+            .removeClass('anchored-to-top')
+            .removeClass('floating')
+            .addClass('anchored-to-bottom');
+        return;
+    }
+
+    $('.action')
+        .removeClass('anchored-to-top')
+        .removeClass('anchored-to-bottom')
+        .addClass('floating');
 }
 
 function setupSignatureForm() {
