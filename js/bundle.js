@@ -1183,14 +1183,16 @@
 
 
 	function setupStickyForm() {
-	    var scrollCallbackDelay = 64;
-	    var scrollTimeout = null;
-	    $(window).on('scroll', function (e) {
-	        clearTimeout(scrollTimeout);
-	        scrollTimeout = setTimeout(function (f) {
-	            onScroll(e);
-	        }, scrollCallbackDelay);
-	    }).trigger('scroll');
+	    // const scrollCallbackDelay = 32;
+	    // let scrollTimeout = null;
+	    // $(window).on('scroll', e => {
+	    //     clearTimeout(scrollTimeout);
+	    //     scrollTimeout = setTimeout(f => {
+	    //         onScroll(e);
+	    //     }, scrollCallbackDelay);
+	    // });
+	    $(window).on('scroll', onScroll);
+	    $(window).trigger('scroll');
 	}
 
 	function onScroll(e) {

@@ -27,14 +27,16 @@ function start() {
 }
 
 function setupStickyForm() {
-    const scrollCallbackDelay = 64;
-    let scrollTimeout = null;
-    $(window).on('scroll', e => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(f => {
-            onScroll(e);
-        }, scrollCallbackDelay);
-    }).trigger('scroll');
+    // const scrollCallbackDelay = 32;
+    // let scrollTimeout = null;
+    // $(window).on('scroll', e => {
+    //     clearTimeout(scrollTimeout);
+    //     scrollTimeout = setTimeout(f => {
+    //         onScroll(e);
+    //     }, scrollCallbackDelay);
+    // });
+    $(window).on('scroll', onScroll);
+    $(window).trigger('scroll');
 }
 
 function onScroll(e) {
