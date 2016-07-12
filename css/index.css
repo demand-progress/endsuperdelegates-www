@@ -952,6 +952,7 @@ body.thanks-page section.more-info p {
 
 body.thanks-page .petition {
     margin: 0;
+    max-width: none !important;
     min-height: 0;
     padding: 0 0 32px;
     text-align: center;
@@ -963,5 +964,64 @@ body.thanks-page section.midnight-share-train {
 }
 
 body.thanks-page .privacy {
+    display: none;
+}
+
+
+/*
+
+News page
+
+*/
+
+body.news-page {
+}
+
+body.news-page .petition-and-form-wrapper {
+    max-width: 600px !important;
+}
+
+body.news-page .petition-and-form-wrapper > .outer-padding {
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+    padding: 0;
+}
+
+body.news-page section.more-info {
+    margin: 0;
+    padding: 8px 30px 24px;
+}
+
+body.news-page section.more-info .more-info-header {
+    margin: 0;
+    max-width: none;
+    padding: 0;
+}
+
+body.news-page section.more-info .more-info-header h3 {
+    margin: 0;
+}
+
+body.news-page section.more-info p {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    max-width: none;
+    padding: 0 0 16px;
+}
+
+body.news-page .petition {
+    margin: 0;
+    max-width: none !important;
+    min-height: 0;
+    padding: 0 0 32px;
+    text-align: center;
+}
+
+body.news-page section.midnight-share-train {
+    /*background-color: rgba(0, 75, 255, 0.15);*/
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+}
+
+body.news-page .privacy {
     display: none;
 }
