@@ -528,6 +528,7 @@ section .share {
     padding-left: 30px;
     text-align: center;
     text-decoration: none;
+    transition: background-color 0.16s;
     width: 120px;
 }
 .share a.facebook {
