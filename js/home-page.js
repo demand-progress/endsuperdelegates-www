@@ -16,19 +16,62 @@ function start() {
     // Disclaimer
     updateDisclaimer();
 
+    // Sticky form
+    setupStickyForm();
+
+    // Signature form
+    setupSignatureForm();
+
     // // Counter
     // FlipCounter.update(Constants.actionKitPage);
+}
 
-    // Setup signature form
-    var readyToSubmit = false;
-    var $signatureForm = $('.action form');
+function setupStickyForm() {
+    const scrollCallbackDelay = 200;
+    let scrollTimeout = null;
+    $(window).on('scroll', e => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(f => {
+            onScroll(e);
+        }, scrollCallbackDelay);
+    }).trigger('scroll');
+}
+
+function onScroll(e) {
+    console.log('Scroll!');
+    const scrollTop = $(window).scrollTop();
+    const containerHeight = $('.petition-and-form-wrapper .outer-padding').outerHeight();
+    const formHeight = $('.action').outerHeight();
+    const formOffset = $('.petition').offset();
+    const suggestedPadding = 16;
+
+    const maxTop = containerHeight - formHeight - suggestedPadding * 2;
+
+    console.log(scrollTop);
+    console.log(formOffset);
+    console.log(suggestedPadding);
+
+    let targetY = scrollTop - formOffset.top + suggestedPadding;
+    if (targetY < 0) {
+        targetY = 0;
+    }
+    if (targetY > maxTop) {
+        targetY = maxTop;
+    }
+
+    $('.action').css('top', targetY);
+}
+
+function setupSignatureForm() {
+    let readyToSubmit = false;
+    const $signatureForm = $('.action form');
     $signatureForm.on('submit', e => {
         if (readyToSubmit) {
             return;
         }
 
         e.preventDefault();
-        var valid = true;
+        let valid = true;
 
         each(Constants.requiredFields, field => {
             if (!valid) {
@@ -37,8 +80,8 @@ function start() {
 
             console.log(field);
 
-            var $field = $('#' + field);
-            var value  = $field.val() && $field.val().trim();
+            const $field = $('#' + field);
+            const value  = $field.val() && $field.val().trim();
             if (!value) {
                 alert('Please enter your ' + $field.attr('placeholder'));
                 $field.focus();
@@ -51,7 +94,7 @@ function start() {
             return false;
         }
 
-        var email = $('#email').val().trim().toLowerCase();
+        const email = $('#email').val().trim().toLowerCase();
 
         if (!Email.validate(email)) {
             $('#email').focus();
@@ -59,7 +102,7 @@ function start() {
             return false;
         }
 
-        var zip = $('#postcode').val().trim();
+        const zip = $('#postcode').val().trim();
         try {
             sessionStorage.zip = zip;
         } catch (e) {}
@@ -77,14 +120,14 @@ function start() {
 }
 
 function updateDisclaimer() {
-    var pattern = /_ns$/;
-    var source = StaticKit.query.cleanedSource;
+    const pattern = /_ns$/;
+    const source = StaticKit.query.cleanedSource;
     if (!source.match(/_ns$/)) {
         return;
     }
 
-    var key = source.replace(pattern, '');
-    var orgName = Constants.orgNames[key];
+    const key = source.replace(pattern, '');
+    const orgName = Constants.orgNames[key];
     if (orgName) {
         $('.disclaimer .org-name').text(orgName);
     }

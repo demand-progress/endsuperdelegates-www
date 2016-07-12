@@ -126,8 +126,8 @@ header .headlines h1 {
     margin: 0px 310px 0 0;
     min-height: 690px;
     padding: 22px 20px 34px;
-    text-align: center;
     position: relative;
+    text-align: center;
 }
 .petition h2 {
     font-size: 30px;
@@ -170,6 +170,8 @@ header .headlines h1 {
     max-width: 310px;
     padding: 24px 0 22px 0;
     position: relative;
+    top: 0;
+    transition: top 0.9s;
     z-index: 99;
 }
 .action h2 {
@@ -207,6 +209,10 @@ header .headlines h1 {
         max-width: 413px;
         min-height: 0;
         padding: 38px 28px 32px;
+    }
+    .action {
+        position: relative;
+        top: 0 !important;
     }
     .action h2 {
         font-size: 24px;
