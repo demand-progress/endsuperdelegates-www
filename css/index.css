@@ -224,9 +224,10 @@ header .headlines h1 {
         padding: 38px 28px 32px;
     }
     .action {
+        bottom: auto !important;
         position: relative !important;
-        right: 0 !important;
-        top: 0 !important;
+        right: auto !important;
+        top: auto !important;
     }
     .action h2 {
         font-size: 24px;
