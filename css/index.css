@@ -173,8 +173,11 @@ header .headlines h1 {
     padding: 24px 0 22px 0;
     position: relative;
     top: 0;
-    transition: top 0.6s;
+    right: 0;
     z-index: 99;
+}
+.action.floating {
+    position: fixed;
 }
 .action h2 {
     color: #f1f1f1;
@@ -213,7 +216,8 @@ header .headlines h1 {
         padding: 38px 28px 32px;
     }
     .action {
-        position: relative;
+        position: relative !important;
+        right: 0 !important;
         top: 0 !important;
     }
     .action h2 {

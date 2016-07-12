@@ -1183,41 +1183,43 @@
 
 
 	function setupStickyForm() {
-	    var scrollCallbackDelay = 64;
-	    var scrollTimeout = null;
-	    $(window).on('scroll resize', function (e) {
-	        clearTimeout(scrollTimeout);
-	        scrollTimeout = setTimeout(function (f) {
-	            onScroll(e);
-	        }, scrollCallbackDelay);
-	    });
+	    $(window).on('scroll resize', onScroll);
+	    $(window).on('resize', onResize);
+
 	    $(window).trigger('scroll');
-	    // $(window).on('scroll resize', onScroll);
+	    $(window).trigger('resize');
+	    $('.action').addClass('floating');
+	}
+
+	function onResize(e) {
+	    var width = $('body').width();
+	    var right = 16;
+	    if (width > 1100) {
+	        right += (width - 1100) / 2;
+	    }
+	    $('.action').css('right', right);
 	}
 
 	function onScroll(e) {
-	    console.log('Scroll!');
-	    var scrollTop = $(window).scrollTop();
 	    var containerHeight = $('.petition-and-form-wrapper .outer-padding').outerHeight();
 	    var formHeight = $('.action').outerHeight();
-	    var formOffset = $('.petition').offset();
+	    var petitionOffset = $('.petition').offset();
+	    var scrollTop = $(window).scrollTop();
 	    var suggestedPadding = 16;
 
-	    var maxTop = containerHeight - formHeight - suggestedPadding * 2;
+	    var maxTop = containerHeight - formHeight - suggestedPadding * 3;
 
-	    console.log(scrollTop);
-	    console.log(formOffset);
-	    console.log(suggestedPadding);
+	    var targetTop = scrollTop - petitionOffset.top;
 
-	    var targetY = scrollTop - formOffset.top + suggestedPadding;
-	    if (targetY < 0) {
-	        targetY = 0;
-	    }
-	    if (targetY > maxTop) {
-	        targetY = maxTop;
+	    if (targetTop < -suggestedPadding) {
+	        targetTop *= -1;
+	    } else if (targetTop > maxTop) {
+	        targetTop = maxTop - targetTop + suggestedPadding - 2;
+	    } else {
+	        targetTop = suggestedPadding;
 	    }
 
-	    $('.action').css('top', targetY);
+	    $('.action').css('top', targetTop);
 	}
 
 	function setupSignatureForm() {

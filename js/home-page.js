@@ -27,41 +27,43 @@ function start() {
 }
 
 function setupStickyForm() {
-    const scrollCallbackDelay = 64;
-    let scrollTimeout = null;
-    $(window).on('scroll resize', e => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(f => {
-            onScroll(e);
-        }, scrollCallbackDelay);
-    });
+    $(window).on('scroll resize', onScroll);
+    $(window).on('resize', onResize);
+
     $(window).trigger('scroll');
-    // $(window).on('scroll resize', onScroll);
+    $(window).trigger('resize');
+    $('.action').addClass('floating');
+}
+
+function onResize(e) {
+    const width = $('body').width();
+    let right = 16;
+    if (width > 1100) {
+        right += (width - 1100) / 2;
+    }
+    $('.action').css('right', right);
 }
 
 function onScroll(e) {
-    console.log('Scroll!');
-    const scrollTop = $(window).scrollTop();
     const containerHeight = $('.petition-and-form-wrapper .outer-padding').outerHeight();
     const formHeight = $('.action').outerHeight();
-    const formOffset = $('.petition').offset();
+    const petitionOffset = $('.petition').offset();
+    const scrollTop = $(window).scrollTop();
     const suggestedPadding = 16;
 
-    const maxTop = containerHeight - formHeight - suggestedPadding * 2;
+    const maxTop = containerHeight - formHeight - suggestedPadding * 3;
 
-    console.log(scrollTop);
-    console.log(formOffset);
-    console.log(suggestedPadding);
+    let targetTop = scrollTop - petitionOffset.top;
 
-    let targetY = scrollTop - formOffset.top + suggestedPadding;
-    if (targetY < 0) {
-        targetY = 0;
-    }
-    if (targetY > maxTop) {
-        targetY = maxTop;
+    if (targetTop < -suggestedPadding) {
+        targetTop *= -1;
+    } else if (targetTop > maxTop) {
+        targetTop = maxTop - targetTop + suggestedPadding - 2;
+    } else {
+        targetTop = suggestedPadding;
     }
 
-    $('.action').css('top', targetY);
+    $('.action').css('top', targetTop);
 }
 
 function setupSignatureForm() {
