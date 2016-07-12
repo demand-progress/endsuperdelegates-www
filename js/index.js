@@ -22,7 +22,7 @@ $(f => {
 
         var target = $(e.target).data('target');
         $('html, body').stop().animate({
-            scrollTop: $(target).offset().top,
+            scrollTop: $(target).offset().top - 16,
         }, 640);
     });
 

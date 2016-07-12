@@ -89,7 +89,7 @@
 
 	        var target = $(e.target).data('target');
 	        $('html, body').stop().animate({
-	            scrollTop: $(target).offset().top
+	            scrollTop: $(target).offset().top - 16
 	        }, 640);
 	    });
 
@@ -1273,6 +1273,10 @@
 	        readyToSubmit = true;
 	        $signatureForm.submit();
 	    });
+
+	    if (!navigator.userAgent.match(/mobile/i)) {
+	        $('#name').focus();
+	    }
 	}
 
 	function updateDisclaimer() {

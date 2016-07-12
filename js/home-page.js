@@ -117,6 +117,10 @@ function setupSignatureForm() {
         readyToSubmit = true;
         $signatureForm.submit();
     });
+
+    if (!navigator.userAgent.match(/mobile/i)) {
+        $('#name').focus();
+    }
 }
 
 function updateDisclaimer() {

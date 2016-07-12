@@ -414,33 +414,30 @@ button {
 }
 .petition .sign-the-petition, .more-info-header .sign-the-petition {
     background-color: #ff0000;
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.12);
-    display: none;
+    border-radius: 4px;
+    border: none;
+    box-shadow: none;
     font-size: 20px;
     font-weight: bold;
-    left: calc((100% - 244px) / 2);
     letter-spacing: 1px;
-    position: absolute;
-    top: -30px;
+    margin: auto;
+    max-width: 100%;
+    padding: 8px 16px;
+    position: relative;
+    text-decoration: none;
+    top: auto;
     transition: background-color 0.16s, box-shadow 0.16s;
     width: 244px;
+    z-index: 999;
 }
 .petition .sign-the-petition:hover, .more-info-header .sign-the-petition:hover {
     background-color: #d01010;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.08);
 }
-.petition .sign-the-petition {
-    display: block;
-    position: relative;
-    top: auto;
-    z-index: 999;
-}
-@media screen and (max-width: 769px) {
-    .petition .sign-the-petition {
-        display: none;
-    }
+@media screen and (max-width: 369px) {
+    .petition .sign-the-petition,
     .more-info-header .sign-the-petition {
-        display: block;
+        font-size: 16px;
     }
 }
 section.more-info {
@@ -495,7 +492,7 @@ section.more-info ul.letter-list {
         padding-right: 0;
     }
 }
-section button.sign-the-petition {
+section .sign-the-petition {
     background-color: #ff0000;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.12);
     color: #f1f1f1;
@@ -506,7 +503,7 @@ section button.sign-the-petition {
     padding: 0 32px;
     transition: background-color 0.16s, box-shadow 0.16s;
 }
-section button.sign-the-petition:hover {
+section .sign-the-petition:hover {
     background-color: #d01010;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.08);
 }
