@@ -222,6 +222,14 @@ header .headlines h1 {
         margin: 0 37px;
     }
 }
+@media screen and (max-width: 399px) {
+    .petition {
+        padding: 38px 16px 32px;
+    }
+    .petition p {
+        padding: 0 8px 24px;
+    }
+}
 .action .form-wrapper {
     margin: 0 auto;
     max-width: 430px;
