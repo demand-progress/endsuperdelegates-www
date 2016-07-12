@@ -1183,7 +1183,7 @@
 
 
 	function setupStickyForm() {
-	    var scrollCallbackDelay = 200;
+	    var scrollCallbackDelay = 64;
 	    var scrollTimeout = null;
 	    $(window).on('scroll', function (e) {
 	        clearTimeout(scrollTimeout);

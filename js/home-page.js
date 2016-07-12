@@ -27,7 +27,7 @@ function start() {
 }
 
 function setupStickyForm() {
-    const scrollCallbackDelay = 200;
+    const scrollCallbackDelay = 64;
     let scrollTimeout = null;
     $(window).on('scroll', e => {
         clearTimeout(scrollTimeout);
