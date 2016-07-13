@@ -80,6 +80,12 @@
 
 	// After the page loads
 	$(function (f) {
+	    // Password protect
+	    var pass = prompt('Please enter password');
+	    if (pass === 'pledge') {
+	        $('body').addClass('unlocked');
+	    }
+
 	    // Set up modals
 	    _modal2.default.setup();
 

@@ -59,9 +59,13 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100% auto;
+    display: none;
     font-family: 'Roboto', sans-serif;
     min-width: 320px;
     text-align: center;
+}
+body.unlocked {
+    display: block;
 }
 @media screen and (max-width: 1589px) {
     body {
