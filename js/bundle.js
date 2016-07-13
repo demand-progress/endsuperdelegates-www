@@ -81,9 +81,15 @@
 	// After the page loads
 	$(function (f) {
 	    // Password protect
-	    var pass = prompt('Please enter password');
-	    if (pass === 'pledge') {
+	    var hasEnteredPassword = localStorage.hasEnteredPassword === 'true';
+	    if (hasEnteredPassword) {
 	        $('body').addClass('unlocked');
+	    } else {
+	        var pass = prompt('Please enter password');
+	        if (pass === 'pledge') {
+	            $('body').addClass('unlocked');
+	            localStorage.hasEnteredPassword = 'true';
+	        }
 	    }
 
 	    // Set up modals
