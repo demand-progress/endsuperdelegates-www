@@ -182,7 +182,7 @@
 	// Social
 	constants.emailSubject = 'Sign this petition: End Superdelegates';
 	constants.emailBody = 'Hi,\n\nI just signed a petition at EndSuperdelegates.com telling the Democratic Party to eliminate the concept of so-called “superdelegates.”\n\nWill you take a moment to contact the Democratic Party?\n\nhttps://' + constants.domain + '/?source=' + _staticKit2.default.query.cleanedSource + '-emailshare\n\nThanks!';
-	constants.tweetText = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016';
+	constants.tweetText = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com';
 
 	// APIs
 	constants.actionKitPage = 'endsuperdelegates-www-before-partners';
