@@ -180,9 +180,9 @@
 	constants.domain = 'endsuperdelegates.com';
 
 	// Social
-	constants.emailSubject = 'Sign this petition: Tell the House to shut down backdoor surveillance';
-	constants.emailBody = 'Hi,\n\nI just signed a petition at StopMassSpying.com telling the House to pass the Massie-Lofgren amendment.\n\nIt would: \n\n1) Ban the NSA and FBI from conducting "backdoor" database searches for information about Americans, and \n\n2) Ban the NSA and FBI from mandating that private companies add backdoors to the encryption standards that are in place to keep technology users safe from malicious data thefts.\n\nWill you take a moment to contact the House?\n\nhttps://' + constants.domain + '/?source=' + _staticKit2.default.query.cleanedSource + '-emailshare\n\nThanks!';
-	constants.tweetText = 'Let\'s pass the Massie-Lofgren amendment and shut down backdoor surveillance! https://stopmassspying.com';
+	constants.emailSubject = 'Sign this petition: End Superdelegates';
+	constants.emailBody = 'Hi,\n\nI just signed a petition at EndSuperdelegates.com telling the Democratic Party to eliminate the concept of so-called “superdelegates.”\n\nWill you take a moment to contact the Democratic Party?\n\nhttps://' + constants.domain + '/?source=' + _staticKit2.default.query.cleanedSource + '-emailshare\n\nThanks!';
+	constants.tweetText = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016';
 
 	// APIs
 	constants.actionKitPage = 'endsuperdelegates-www-before-partners';

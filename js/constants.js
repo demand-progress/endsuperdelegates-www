@@ -8,23 +8,17 @@ var constants = {};
 constants.domain = 'endsuperdelegates.com';
 
 // Social
-constants.emailSubject = 'Sign this petition: Tell the House to shut down backdoor surveillance';
+constants.emailSubject = 'Sign this petition: End Superdelegates';
 constants.emailBody = `Hi,
 
-I just signed a petition at StopMassSpying.com telling the House to pass the Massie-Lofgren amendment.
+I just signed a petition at EndSuperdelegates.com telling the Democratic Party to eliminate the concept of so-called “superdelegates.”
 
-It would: 
-
-1) Ban the NSA and FBI from conducting "backdoor" database searches for information about Americans, and 
-
-2) Ban the NSA and FBI from mandating that private companies add backdoors to the encryption standards that are in place to keep technology users safe from malicious data thefts.
-
-Will you take a moment to contact the House?
+Will you take a moment to contact the Democratic Party?
 
 https://${constants.domain}/?source=${StaticKit.query.cleanedSource}-emailshare
 
 Thanks!`;
-constants.tweetText      = `Let's pass the Massie-Lofgren amendment and shut down backdoor surveillance! https://stopmassspying.com`;
+constants.tweetText      = `Make the Democratic Party democratic: It's time to #EndSuperDelegates #DNC2016`;
 
 // APIs
 constants.actionKitPage = 'endsuperdelegates-www-before-partners';
