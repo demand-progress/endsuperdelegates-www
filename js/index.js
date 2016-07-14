@@ -5,6 +5,7 @@ import FastClick from 'fastclick';
 import HomePage from './home-page';
 import Modal from './modal';
 import StaticKit from './static-kit';
+import Utils from './utils';
 // import ThanksPage from './thanks-page';
 
 
@@ -40,9 +41,22 @@ $(f => {
     $('a.twitter').on('click', e => {
         e.preventDefault();
 
+        Utils.shuffle(Constants.twitterHandles);
+
+        let charactersLeft = 38;
+        let tweet = Constants.tweetText;
+        for (let i = 0; i < Constants.twitterHandles.length; i++) {
+            const addition = ' ' + Constants.twitterHandles[i];
+            const length = addition.length;
+            if (length < charactersLeft) {
+                tweet += addition;
+                charactersLeft -= length;
+            }
+        }
+
         var url =
             'https://twitter.com/intent/tweet?text=' +
-            encodeURIComponent(Constants.tweetText);
+            encodeURIComponent(tweet);
         window.open(url);
     });
 

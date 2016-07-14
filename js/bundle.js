@@ -70,15 +70,19 @@
 
 	var _staticKit2 = _interopRequireDefault(_staticKit);
 
+	var _utils = __webpack_require__(116);
+
+	var _utils2 = _interopRequireDefault(_utils);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// import ThanksPage from './thanks-page';
 
 	// FastClick for mobile
-	// Modules
 	_fastclick2.default.attach(document.body);
 
 	// After the page loads
+	// Modules
 	$(function (f) {
 	    // Set up modals
 	    _modal2.default.setup();
@@ -105,7 +109,20 @@
 	    $('a.twitter').on('click', function (e) {
 	        e.preventDefault();
 
-	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(_constants2.default.tweetText);
+	        _utils2.default.shuffle(_constants2.default.twitterHandles);
+
+	        var charactersLeft = 38;
+	        var tweet = _constants2.default.tweetText;
+	        for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
+	            var addition = ' ' + _constants2.default.twitterHandles[i];
+	            var length = addition.length;
+	            if (length < charactersLeft) {
+	                tweet += addition;
+	                charactersLeft -= length;
+	            }
+	        }
+
+	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
 	        window.open(url);
 	    });
 
@@ -203,6 +220,9 @@
 	    rootsaction: 'RootsAction',
 	    watchdog: 'Watchdog.net'
 	};
+
+	// Twitter Handles
+	constants.twitterHandles = ['@AceDblDwn', '@amyhoworth', '@ArevaMartin', '@AssemblymanWiz', '@AustinADavis24', '@Bakari_Sellers', '@Bakari_Sellers', '@BarneyFrank', '@BetsyButlerLA', '@cleo_fields', '@colleencondon', '@DavidPascrell', '@deboraburger', '@debwillig', '@DelegateDonna', '@DoloresHuerta', '@DPM1000', '@DrJoseFMoreno', '@dupreeforgov', '@eianrobinson', '@ElderNewport', '@FollowSaifKhan', '@GMLaw_Tweets', '@GoIUPAT', '@GovJimHodges', '@govteacherscott', '@JacksonLeeTX18', '@JaneKim', '@javiermgonzales', '@jenhouse', '@joethepleb', '@josehuizar', '@JoshHodes', '@karen_olson', '@lateefahsimon', '@LauraTalmus', '@leticiavdp', '@lupedrick', '@Maggie_Kivvit', '@MariaTCardona', '@MichaelBColeman', '@michaeljtate', '@mikehtrujillo', '@om3', '@rbracy30', '@ReginaTMontoya', '@RobertDonat', '@ShefaliRazdan', '@staceyabrams', '@StephanieforSD', '@suemoravec', '@SusanEsserman', '@TMD_DallasComm', '@tmservo433', '@USinTT'];
 
 	exports.default = constants;
 
@@ -4948,6 +4968,29 @@
 	};
 
 	exports.default = Modal;
+
+/***/ },
+/* 116 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var utils = {};
+
+	utils.shuffle = function (a) {
+	    var j, x, i;
+	    for (i = a.length; i; i--) {
+	        j = Math.floor(Math.random() * i);
+	        x = a[i - 1];
+	        a[i - 1] = a[j];
+	        a[j] = x;
+	    }
+	};
+
+	exports.default = utils;
 
 /***/ }
 /******/ ]);
