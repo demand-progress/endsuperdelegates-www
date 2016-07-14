@@ -516,6 +516,30 @@ section.more-info ul.letter-list {
         padding-right: 0;
     }
 }
+section .citations {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0 0;
+    word-break: break-word;
+}
+section .citations p {
+    font-size: 0.8em;
+    line-height: 1.3;
+    padding-bottom: 16px;
+}
+section .citations p a {
+    color: #0099ff;
+    display: block;
+    font-size: 0.7em;
+    line-height: 1.4;
+}
+section .citations .links {
+    padding: 0 16px;
+}
+@media screen and (max-width: 769px) {
+    section .citations {
+        padding-bottom: 32px;
+    }
+}
 section .sign-the-petition {
     background-color: #ff0000;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.12);
