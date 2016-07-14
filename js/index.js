@@ -13,18 +13,6 @@ FastClick.attach(document.body);
 
 // After the page loads
 $(f => {
-    // Password protect
-    const hasEnteredPassword = (localStorage.hasEnteredPassword === 'true');
-    if (hasEnteredPassword) {
-        $('body').addClass('unlocked');
-    } else {
-        const pass = prompt('Please enter password');
-        if (pass === 'pledge') {
-            $('body').addClass('unlocked');
-            localStorage.hasEnteredPassword = 'true';
-        }
-    }
-
     // Set up modals
     Modal.setup();
 
