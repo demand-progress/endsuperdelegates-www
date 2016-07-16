@@ -584,7 +584,7 @@ section .share {
     margin: 20px auto 10px auto;
 }
 .share a {
-    border-radius: 20px;
+    border-radius: 4px;
     color: white;
     display: inline-block;
     font-size: 20px;
@@ -1146,6 +1146,7 @@ body .twitter-tool .button {
     background-repeat: no-repeat;
     background-position: 16px 8px;
     background-size: 30px auto;
+    border-radius: 4px;
     color: white;
     display: inline-block;
     font-size: 20px;
