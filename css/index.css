@@ -976,6 +976,7 @@ body.thanks-page section.more-info {
     box-shadow: none;
     color: #fff;
     margin: 0;
+    padding-bottom: 8px;
 }
 
 body.thanks-page section.more-info .more-info-header {
@@ -1012,6 +1013,18 @@ body.thanks-page .petition {
 body.thanks-page section.midnight-share-train {
     background-color: rgba(0, 75, 255, 0.15);
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+}
+
+body.thanks-page .fb-email-intro {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    max-width: none;
+    padding: 32px;
+    line-height: 1.4;
+    text-align: center;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
 }
 
 body.thanks-page .privacy {
