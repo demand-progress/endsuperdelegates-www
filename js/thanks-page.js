@@ -42,7 +42,6 @@ function getTweetLength(tweet) {
 
 function addHandlesToTweet(tweet) {
     let charactersLeft = 140 - getTweetLength(tweet);
-    console.log('charactersLeft:', charactersLeft);
 
     Utils.shuffle(Constants.twitterHandles);
     for (let i = 0; i < Constants.twitterHandles.length; i++) {

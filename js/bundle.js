@@ -5055,7 +5055,6 @@
 
 	function addHandlesToTweet(tweet) {
 	    var charactersLeft = 140 - getTweetLength(tweet);
-	    console.log('charactersLeft:', charactersLeft);
 
 	    _utils2.default.shuffle(_constants2.default.twitterHandles);
 	    for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
