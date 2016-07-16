@@ -6,7 +6,7 @@ import HomePage from './home-page';
 import Modal from './modal';
 import StaticKit from './static-kit';
 import Utils from './utils';
-// import ThanksPage from './thanks-page';
+import ThanksPage from './thanks-page';
 
 
 // FastClick for mobile
@@ -44,7 +44,7 @@ $(f => {
         Utils.shuffle(Constants.twitterHandles);
 
         let charactersLeft = 38;
-        let tweet = Constants.tweetText;
+        let tweet = Constants.tweet;
         for (let i = 0; i < Constants.twitterHandles.length; i++) {
             const addition = ' ' + Constants.twitterHandles[i];
             const length = addition.length;
@@ -77,9 +77,9 @@ $(f => {
             HomePage.start();
             break;
 
-        // case 'thanks':
-        //     ThanksPage.start();
-        //     break;
+        case 'thanks':
+            ThanksPage.start();
+            break;
     }
 
     // Google Analytics

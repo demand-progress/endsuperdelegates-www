@@ -74,15 +74,17 @@
 
 	var _utils2 = _interopRequireDefault(_utils);
 
+	var _thanksPage = __webpack_require__(117);
+
+	var _thanksPage2 = _interopRequireDefault(_thanksPage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import ThanksPage from './thanks-page';
-
 	// FastClick for mobile
+	// Modules
 	_fastclick2.default.attach(document.body);
 
 	// After the page loads
-	// Modules
 	$(function (f) {
 	    // Set up modals
 	    _modal2.default.setup();
@@ -112,7 +114,7 @@
 	        _utils2.default.shuffle(_constants2.default.twitterHandles);
 
 	        var charactersLeft = 38;
-	        var tweet = _constants2.default.tweetText;
+	        var tweet = _constants2.default.tweet;
 	        for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
 	            var addition = ' ' + _constants2.default.twitterHandles[i];
 	            var length = addition.length;
@@ -141,9 +143,9 @@
 	            _homePage2.default.start();
 	            break;
 
-	        // case 'thanks':
-	        //     ThanksPage.start();
-	        //     break;
+	        case 'thanks':
+	            _thanksPage2.default.start();
+	            break;
 	    }
 
 	    // Google Analytics
@@ -199,7 +201,7 @@
 	// Social
 	constants.emailSubject = 'Sign this petition: End Superdelegates';
 	constants.emailBody = 'Hi,\n\nI just signed a petition at EndSuperdelegates.com telling the Democratic Party to eliminate the concept of so-called “superdelegates.”\n\nWill you take a moment to contact the Democratic Party?\n\nhttps://' + constants.domain + '/?source=' + _staticKit2.default.query.cleanedSource + '-emailshare\n\nThanks!';
-	constants.tweetText = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com';
+	constants.tweet = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com';
 
 	// APIs
 	constants.actionKitPage = 'endsuperdelegates-www-with-partners';
@@ -4991,6 +4993,121 @@
 	};
 
 	exports.default = utils;
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _constants = __webpack_require__(2);
+
+	var _constants2 = _interopRequireDefault(_constants);
+
+	var _staticKit = __webpack_require__(3);
+
+	var _staticKit2 = _interopRequireDefault(_staticKit);
+
+	var _utils = __webpack_require__(116);
+
+	var _utils2 = _interopRequireDefault(_utils);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var patterns = {
+	    url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g
+	};
+
+	function start() {
+	    var tweet = _constants2.default.tweet;
+	    tweet = addHandlesToTweet(tweet);
+	    var preview = addColorSpansToTweet(tweet);
+
+	    $('.twitter-tool .tweet').html(preview);
+
+	    $('.twitter-tool-cta').on('click', function (e) {
+	        e.preventDefault();
+
+	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
+	        window.open(url);
+	    });
+
+	    $('.twitter-tool').addClass('visible');
+	}
+
+	function getTweetLength(tweet) {
+	    var length = tweet.length;
+
+	    // URLs cost 23 characters
+	    var urls = tweet.match(patterns.url);
+	    for (var i = 0; i < urls.length; i++) {
+	        var url = urls[i];
+	        length -= url.length;
+	        length += 23;
+	    }
+
+	    return length;
+	}
+
+	function addHandlesToTweet(tweet) {
+	    var charactersLeft = 140 - getTweetLength(tweet);
+	    console.log('charactersLeft:', charactersLeft);
+
+	    _utils2.default.shuffle(_constants2.default.twitterHandles);
+	    for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
+	        var addition = ' ' + _constants2.default.twitterHandles[i];
+	        var length = addition.length;
+	        if (length < charactersLeft) {
+	            tweet += addition;
+	            charactersLeft -= length;
+	        }
+	    }
+	    return tweet;
+	}
+
+	function addColorSpansToTweet(tweet) {
+	    tweet = tweet.replace(/#\w+/g, function (match) {
+	        return '<span class="blue">' + match + '</span>';
+	    });
+	    tweet = tweet.replace(/@\w+/g, function (match) {
+	        return '<span class="blue">' + match + '</span>';
+	    });
+	    tweet = tweet.replace(/https?:\/\/[\w.]+/g, function (match) {
+	        return '<span class="blue">' + match + '</span>';
+	    });
+	    return tweet;
+	}
+
+	function onTweetFormSubmit(e) {
+	    e.preventDefault();
+
+	    var tweet = '.@' + state.twitterIDs.join(' @') + ' ' + state.twitterText;
+
+	    var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
+
+	    window.open(url);
+
+	    // Show thanks
+	    var $submit = $('.tweet-wrapper button');
+	    $submit.addClass('thanks');
+	    $submit.text('Thanks!');
+
+	    // Send event
+	    ga('send', {
+	        hitType: 'event',
+	        eventCategory: 'ThanksPageTweet',
+	        eventAction: 'sent',
+	        eventLabel: _constants2.default.actionKitPage
+	    });
+	}
+
+	exports.default = {
+	    start: start
+	};
 
 /***/ }
 /******/ ]);

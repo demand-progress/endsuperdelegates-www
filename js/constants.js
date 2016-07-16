@@ -18,7 +18,7 @@ Will you take a moment to contact the Democratic Party?
 https://${constants.domain}/?source=${StaticKit.query.cleanedSource}-emailshare
 
 Thanks!`;
-constants.tweetText = `Make the Democratic Party democratic: It's time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com`;
+constants.tweet = `Make the Democratic Party democratic: It's time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com`;
 
 // APIs
 constants.actionKitPage = 'endsuperdelegates-www-with-partners';
