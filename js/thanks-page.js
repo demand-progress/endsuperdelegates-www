@@ -23,6 +23,18 @@ function start() {
         window.open(url);
     });
 
+    const initialDelay = 100;
+    const incrementalDelay = 50;
+
+    $('.twitter-tool .tweet .handle').each((i, el) => {
+        $(el).css({
+            'transition-delay': (initialDelay + (incrementalDelay * i)) + 'ms',
+        });
+
+        console.log($(el));
+        console.log($(el).css('transition'));
+    });
+
     $('.twitter-tool').addClass('visible');
 }
 
@@ -57,7 +69,7 @@ function addHandlesToTweet(tweet) {
 
 function addColorSpansToTweet(tweet) {
     tweet = tweet.replace(/#\w+/g, match => `<span class="blue">${match}</span>`);
-    tweet = tweet.replace(/@\w+/g, match => `<span class="blue">${match}</span>`);
+    tweet = tweet.replace(/@\w+/g, match => `<span class="blue handle">${match}</span>`);
     tweet = tweet.replace(/https?:\/\/[\w.]+/g, match => `<span class="blue">${match}</span>`);
     return tweet;
 }

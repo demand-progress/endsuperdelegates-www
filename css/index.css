@@ -1140,6 +1140,15 @@ body .twitter-tool .tweet .blue {
     color: #50bbff;
 }
 
+body .twitter-tool .tweet .handle {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+body .twitter-tool.visible .tweet .handle {
+    opacity: 1;
+}
+
 body .twitter-tool .button {
     background-color: #4099ff;
     background-image: url(../images/social/Twitter.svg);

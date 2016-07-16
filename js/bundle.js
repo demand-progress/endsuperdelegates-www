@@ -5036,6 +5036,18 @@
 	        window.open(url);
 	    });
 
+	    var initialDelay = 100;
+	    var incrementalDelay = 50;
+
+	    $('.twitter-tool .tweet .handle').each(function (i, el) {
+	        $(el).css({
+	            'transition-delay': initialDelay + incrementalDelay * i + 'ms'
+	        });
+
+	        console.log($(el));
+	        console.log($(el).css('transition'));
+	    });
+
 	    $('.twitter-tool').addClass('visible');
 	}
 
@@ -5073,7 +5085,7 @@
 	        return '<span class="blue">' + match + '</span>';
 	    });
 	    tweet = tweet.replace(/@\w+/g, function (match) {
-	        return '<span class="blue">' + match + '</span>';
+	        return '<span class="blue handle">' + match + '</span>';
 	    });
 	    tweet = tweet.replace(/https?:\/\/[\w.]+/g, function (match) {
 	        return '<span class="blue">' + match + '</span>';
