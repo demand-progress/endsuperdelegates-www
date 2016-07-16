@@ -67,7 +67,7 @@ $(f => {
         var url =
             'mailto:?subject=' + encodeURIComponent(Constants.emailSubject) +
             '&body=' + encodeURIComponent(Constants.emailBody);
-        window.location.href = url;
+        window.open(url);
     });
 
     // Page specific code

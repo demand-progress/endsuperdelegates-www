@@ -133,7 +133,7 @@
 	        e.preventDefault();
 
 	        var url = 'mailto:?subject=' + encodeURIComponent(_constants2.default.emailSubject) + '&body=' + encodeURIComponent(_constants2.default.emailBody);
-	        window.location.href = url;
+	        window.open(url);
 	    });
 
 	    // Page specific code
