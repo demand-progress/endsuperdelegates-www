@@ -631,9 +631,6 @@ section .share {
     max-width: 280px;
     vertical-align: middle;
 }
-.logos .smaller {
-    display: none;
-}
 .logos .smaller img {
     max-height: 180px;
     max-width: 210px;

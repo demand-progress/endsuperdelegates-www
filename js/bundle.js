@@ -202,7 +202,7 @@
 	constants.tweetText = 'Make the Democratic Party democratic: It\'s time to #EndSuperDelegates #DNC2016 https://endsuperdelegates.com';
 
 	// APIs
-	constants.actionKitPage = 'endsuperdelegates-www-before-partners';
+	constants.actionKitPage = 'endsuperdelegates-www-with-partners';
 	constants.callToolURL = 'https://dp-call-congress.herokuapp.com/create?callback=?';
 	constants.feedbackToolURL = 'https://dp-feedback-tool.herokuapp.com/api/v1/feedback?callback=?';
 	constants.sunlightAPIKey = '3779f52f552743d999b2c5fe1cda70b6';
