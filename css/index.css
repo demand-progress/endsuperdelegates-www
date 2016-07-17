@@ -1190,3 +1190,14 @@ body .twitter-tool .button:hover {
         border-radius: 0;
     }
 }
+
+/*
+
+Twitter Feed
+
+*/
+
+.twitter-feed {
+    border-bottom: 1px solid #ccc;
+    padding: 48px 32px;
+}
