@@ -6,13 +6,11 @@ import Utils from './utils';
 const patterns = {
     url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g,
 };
+let handles = JSON.parse(JSON.stringify(Constants.twitterHandles));
+let tweet = '';
 
 function start() {
-    let tweet = Constants.tweet;
-    tweet = addHandlesToTweet(tweet);
-    const preview = addColorSpansToTweet(tweet);
-
-    $('.twitter-tool .tweet').html(preview);
+    generateTweet();
 
     $('.twitter-tool-cta').on('click', e => {
         e.preventDefault();
@@ -21,21 +19,38 @@ function start() {
             'https://twitter.com/intent/tweet?text=' +
             encodeURIComponent(tweet);
         window.open(url);
-    });
 
+        generateTweet();
+    });
+}
+
+function generateTweet() {
+    // Congratulate
+    if (handles.length === 0) {
+        $('body').addClass('twitter-tool-completed');
+        return;
+    }
+
+    // Update Tweet
+    tweet = Constants.tweet;
+    tweet = addHandlesToTweet(tweet);
+
+    // Update Preview
+    const preview = addColorSpansToTweet(tweet);
+    $('.twitter-tool .tweet').html(preview);
+
+    // Animate
     const initialDelay = 100;
     const incrementalDelay = 50;
-
     $('.twitter-tool .tweet .handle').each((i, el) => {
         $(el).css({
             'transition-delay': (initialDelay + (incrementalDelay * i)) + 'ms',
         });
-
-        console.log($(el));
-        console.log($(el).css('transition'));
     });
-
-    $('.twitter-tool').addClass('visible');
+    $('.twitter-tool').removeClass('visible');
+    setTimeout(f => {
+        $('.twitter-tool').addClass('visible');
+    }, 0);
 }
 
 function getTweetLength(tweet) {
@@ -43,11 +58,10 @@ function getTweetLength(tweet) {
 
     // URLs cost 23 characters
     const urls = tweet.match(patterns.url);
-    for (let i = 0; i < urls.length; i++) {
-        const url = urls[i];
+    _.each(urls, url => {
         length -= url.length;
         length += 23;
-    }
+    });
 
     return length;
 }
@@ -55,15 +69,21 @@ function getTweetLength(tweet) {
 function addHandlesToTweet(tweet) {
     let charactersLeft = 140 - getTweetLength(tweet);
 
-    Utils.shuffle(Constants.twitterHandles);
-    for (let i = 0; i < Constants.twitterHandles.length; i++) {
-        const addition = ' ' + Constants.twitterHandles[i];
+    Utils.shuffle(handles);
+
+    const addedHandles = [];
+    _.each(handles, handle => {
+        const addition = ' ' + handle;
         const length = addition.length;
         if (length < charactersLeft) {
             tweet += addition;
             charactersLeft -= length;
+            addedHandles.push(handle);
         }
-    }
+    });
+
+    _.pullAll(handles, addedHandles);
+
     return tweet;
 }
 

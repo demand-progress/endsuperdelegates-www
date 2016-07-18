@@ -5021,34 +5021,49 @@
 	var patterns = {
 	    url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g
 	};
+	var handles = JSON.parse(JSON.stringify(_constants2.default.twitterHandles));
+	var tweet = '';
 
 	function start() {
-	    var tweet = _constants2.default.tweet;
-	    tweet = addHandlesToTweet(tweet);
-	    var preview = addColorSpansToTweet(tweet);
-
-	    $('.twitter-tool .tweet').html(preview);
+	    generateTweet();
 
 	    $('.twitter-tool-cta').on('click', function (e) {
 	        e.preventDefault();
 
 	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
 	        window.open(url);
-	    });
 
+	        generateTweet();
+	    });
+	}
+
+	function generateTweet() {
+	    // Congratulate
+	    if (handles.length === 0) {
+	        $('body').addClass('twitter-tool-completed');
+	        return;
+	    }
+
+	    // Update Tweet
+	    tweet = _constants2.default.tweet;
+	    tweet = addHandlesToTweet(tweet);
+
+	    // Update Preview
+	    var preview = addColorSpansToTweet(tweet);
+	    $('.twitter-tool .tweet').html(preview);
+
+	    // Animate
 	    var initialDelay = 100;
 	    var incrementalDelay = 50;
-
 	    $('.twitter-tool .tweet .handle').each(function (i, el) {
 	        $(el).css({
 	            'transition-delay': initialDelay + incrementalDelay * i + 'ms'
 	        });
-
-	        console.log($(el));
-	        console.log($(el).css('transition'));
 	    });
-
-	    $('.twitter-tool').addClass('visible');
+	    $('.twitter-tool').removeClass('visible');
+	    setTimeout(function (f) {
+	        $('.twitter-tool').addClass('visible');
+	    }, 0);
 	}
 
 	function getTweetLength(tweet) {
@@ -5056,11 +5071,10 @@
 
 	    // URLs cost 23 characters
 	    var urls = tweet.match(patterns.url);
-	    for (var i = 0; i < urls.length; i++) {
-	        var url = urls[i];
+	    _.each(urls, function (url) {
 	        length -= url.length;
 	        length += 23;
-	    }
+	    });
 
 	    return length;
 	}
@@ -5068,15 +5082,21 @@
 	function addHandlesToTweet(tweet) {
 	    var charactersLeft = 140 - getTweetLength(tweet);
 
-	    _utils2.default.shuffle(_constants2.default.twitterHandles);
-	    for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
-	        var addition = ' ' + _constants2.default.twitterHandles[i];
+	    _utils2.default.shuffle(handles);
+
+	    var addedHandles = [];
+	    _.each(handles, function (handle) {
+	        var addition = ' ' + handle;
 	        var length = addition.length;
 	        if (length < charactersLeft) {
 	            tweet += addition;
 	            charactersLeft -= length;
+	            addedHandles.push(handle);
 	        }
-	    }
+	    });
+
+	    _.pullAll(handles, addedHandles);
+
 	    return tweet;
 	}
 

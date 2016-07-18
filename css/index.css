@@ -94,7 +94,7 @@ header .headlines h1, header .headlines h2, header .headlines h3 {
 header .headlines a.news-updates {
     color: #4ea4ff;
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     position: absolute;
     right: 16px;
     top: 16px;
@@ -1202,6 +1202,11 @@ body .twitter-tool .tweet {
     word-break: break-word;
 }
 
+body .twitter-tool .congratulations {
+    color: #fff;
+    display: none;
+}
+
 body .twitter-tool .tweet .blue {
     color: #50bbff;
 }
@@ -1240,6 +1245,18 @@ body .twitter-tool .button {
 
 body .twitter-tool .button:hover {
     background-color: #3089ef;
+}
+
+body.twitter-tool-completed .shows-on-twitter-tool-completion {
+    display: initial;
+}
+
+body.twitter-tool-completed .hides-on-twitter-tool-completion {
+    display: none;
+}
+
+body.twitter-tool-completed .twitter-tool {
+    min-height: unset;
 }
 
 @media (max-width: 809px) {
