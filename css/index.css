@@ -94,10 +94,10 @@ header .headlines h1, header .headlines h2, header .headlines h3 {
 header .headlines a.news-updates {
     color: #4ea4ff;
     display: block;
-    font-size: 16px;
+    font-size: 20px;
     position: absolute;
-    right: 16px;
-    top: 16px;
+    right: 20px;
+    top: 20px;
     transition: color 0.16s;
 }
 header .headlines a.news-updates:hover {
