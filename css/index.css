@@ -91,6 +91,18 @@ header .headlines h1, header .headlines h2, header .headlines h3 {
     line-height: 1;
     margin: 0 auto;
 }
+header .headlines a.news-updates {
+    color: #4ea4ff;
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    transition: color 0.16s;
+}
+header .headlines a.news-updates:hover {
+    color: #3195ff;
+}
 header .headlines h1 {
     background-color: rgba(255, 0, 0, 0.6);
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
@@ -98,6 +110,10 @@ header .headlines h1 {
     font-size: 80px;
     letter-spacing: 1px;
     padding: 12px 16px 11px;
+}
+header .headlines h1 a {
+    color: #f1f1f1;
+    text-decoration: none;
 }
 @media screen and (max-width: 860px) {
     header .headlines h1 {
@@ -1055,7 +1071,7 @@ body.news-page {
 }
 
 body.news-page .petition-and-form-wrapper {
-    max-width: 600px !important;
+    max-width: 800px !important;
 }
 
 body.news-page .petition-and-form-wrapper > .outer-padding {
@@ -1066,7 +1082,8 @@ body.news-page .petition-and-form-wrapper > .outer-padding {
 body.news-page section.more-info {
     border-radius: 8px;
     margin: 0;
-    padding: 8px 30px 24px;
+    padding: 8px 42px 24px;
+    word-break: break-word;
 }
 
 body.news-page section.more-info .more-info-header {
@@ -1079,12 +1096,60 @@ body.news-page section.more-info .more-info-header h3 {
     margin: 0;
 }
 
+body.news-page section.more-info hr {
+    background-color: #ddd;
+    border: none;
+    height: 1px;
+    margin: 16px 0 32px;
+    outline: none;
+    padding: 0;
+}
+
 body.news-page section.more-info p {
     font-size: 18px;
     font-weight: 400;
+    line-height: 1.4;
     margin: 0;
     max-width: none;
     padding: 0 0 16px;
+}
+
+body.news-page section.more-info p.quote-intro {
+    font-weight: bold;
+}
+
+body.news-page section.more-info p.quote {
+    font-style: italic;
+    padding: 0 16px 16px;
+}
+
+body.news-page section.more-info p.centered {
+    text-align: center;
+}
+
+body.news-page section.more-info p.italic {
+    font-style: italic;
+}
+
+body.news-page section.more-info p.bold {
+    font-weight: bold;
+}
+
+body.news-page section.more-info p.smaller {
+    font-size: 0.8em;
+    line-height: 1.4;
+}
+
+body.news-page section.more-info h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+body.news-page section.more-info h5 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 16px 0;
 }
 
 body.news-page .petition {
