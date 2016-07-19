@@ -5,7 +5,7 @@ import FastClick from 'fastclick';
 import HomePage from './home-page';
 import Modal from './modal';
 import StaticKit from './static-kit';
-import Utils from './utils';
+// import Utils from './utils';
 import ThanksPage from './thanks-page';
 
 
@@ -41,12 +41,14 @@ $(f => {
     $('a.twitter').on('click', e => {
         e.preventDefault();
 
-        Utils.shuffle(Constants.twitterHandles);
+        let handles = _.clone(Constants.twitterHandles);
+        handles = _.uniq(handles);
+        handles = _.shuffle(handles);
 
         let charactersLeft = 38;
         let tweet = Constants.tweet;
-        for (let i = 0; i < Constants.twitterHandles.length; i++) {
-            const addition = ' ' + Constants.twitterHandles[i];
+        for (let i = 0; i < handles.length; i++) {
+            const addition = ' ' + handles[i];
             const length = addition.length;
             if (length < charactersLeft) {
                 tweet += addition;

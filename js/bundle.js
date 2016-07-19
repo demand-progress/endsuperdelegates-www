@@ -70,10 +70,6 @@
 
 	var _staticKit2 = _interopRequireDefault(_staticKit);
 
-	var _utils = __webpack_require__(116);
-
-	var _utils2 = _interopRequireDefault(_utils);
-
 	var _thanksPage = __webpack_require__(117);
 
 	var _thanksPage2 = _interopRequireDefault(_thanksPage);
@@ -81,10 +77,12 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// FastClick for mobile
-	// Modules
 	_fastclick2.default.attach(document.body);
 
 	// After the page loads
+
+	// import Utils from './utils';
+	// Modules
 	$(function (f) {
 	    // Set up modals
 	    _modal2.default.setup();
@@ -111,12 +109,14 @@
 	    $('a.twitter').on('click', function (e) {
 	        e.preventDefault();
 
-	        _utils2.default.shuffle(_constants2.default.twitterHandles);
+	        var handles = _.clone(_constants2.default.twitterHandles);
+	        handles = _.uniq(handles);
+	        handles = _.shuffle(handles);
 
 	        var charactersLeft = 38;
 	        var tweet = _constants2.default.tweet;
-	        for (var i = 0; i < _constants2.default.twitterHandles.length; i++) {
-	            var addition = ' ' + _constants2.default.twitterHandles[i];
+	        for (var i = 0; i < handles.length; i++) {
+	            var addition = ' ' + handles[i];
 	            var length = addition.length;
 	            if (length < charactersLeft) {
 	                tweet += addition;
@@ -224,7 +224,7 @@
 	};
 
 	// Twitter Handles
-	constants.twitterHandles = ['@AceDblDwn', '@amyhoworth', '@ArevaMartin', '@AssemblymanWiz', '@AustinADavis24', '@Bakari_Sellers', '@BarneyFrank', '@BetsyButlerLA', '@cleo_fields', '@colleencondon', '@cynthiakouril', '@DavidPascrell', '@deboraburger', '@debwillig', '@DelegateDonna', '@DoloresHuerta', '@DPM1000', '@DrJoseFMoreno', '@dupreeforgov', '@eianrobinson', '@ElderNewport', '@FollowSaifKhan', '@GMLaw_Tweets', '@GoIUPAT', '@GovJimHodges', '@govteacherscott', '@JacksonLeeTX18', '@JaneKim', '@javiermgonzales', '@jenhouse', '@joethepleb', '@josehuizar', '@JoshHodes', '@karen_olson', '@lateefahsimon', '@LauraTalmus', '@leticiavdp', '@lupedrick', '@Maggie_Kivvit', '@MariaTCardona', '@MichaelBColeman', '@michaeljtate', '@mikehtrujillo', '@om3', '@RachelLavine2', '@rbracy30', '@ReginaTMontoya', '@ReneeParadis', '@reshmasaujani', '@RobertDonat', '@ShefaliRazdan', '@staceyabrams', '@StephanieforSD', '@suemoravec', '@SusanEsserman', '@TMD_DallasComm', '@tmservo433', '@USinTT'];
+	constants.twitterHandles = ['@AceDblDwn', '@amyhoworth', '@ArevaMartin', '@AssemblymanWiz', '@AustinADavis24', '@Bakari_Sellers', '@BarneyFrank', '@berniesanders', '@BetsyButlerLA', '@cleo_fields', '@colleencondon', '@cynthiakouril', '@DavidPascrell', '@deboraburger', '@debwillig', '@DelegateDonna', '@demconvention', '@DoloresHuerta', '@DPM1000', '@DrJoseFMoreno', '@dupreeforgov', '@dwstweets', '@eianrobinson', '@ElderNewport', '@FollowSaifKhan', '@GMLaw_Tweets', '@GoIUPAT', '@GovJimHodges', '@govteacherscott', '@hillaryclinton', '@JacksonLeeTX18', '@JaneKim', '@javiermgonzales', '@jenhouse', '@joethepleb', '@josehuizar', '@JoshHodes', '@karen_olson', '@lateefahsimon', '@LauraTalmus', '@leticiavdp', '@lupedrick', '@Maggie_Kivvit', '@MariaTCardona', '@MichaelBColeman', '@michaeljtate', '@mikehtrujillo', '@om3', '@RachelLavine2', '@rbracy30', '@ReginaTMontoya', '@ReneeParadis', '@reshmasaujani', '@RobertDonat', '@ShefaliRazdan', '@staceyabrams', '@StephanieforSD', '@suemoravec', '@SusanEsserman', '@TMD_DallasComm', '@tmservo433', '@USinTT'];
 
 	exports.default = constants;
 
@@ -4972,29 +4972,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 116 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var utils = {};
-
-	utils.shuffle = function (a) {
-	    var j, x, i;
-	    for (i = a.length; i; i--) {
-	        j = Math.floor(Math.random() * i);
-	        x = a[i - 1];
-	        a[i - 1] = a[j];
-	        a[j] = x;
-	    }
-	};
-
-	exports.default = utils;
-
-/***/ },
+/* 116 */,
 /* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5012,19 +4990,21 @@
 
 	var _staticKit2 = _interopRequireDefault(_staticKit);
 
-	var _utils = __webpack_require__(116);
-
-	var _utils2 = _interopRequireDefault(_utils);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import Utils from './utils';
 
 	var patterns = {
 	    url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g
 	};
-	var handles = JSON.parse(JSON.stringify(_constants2.default.twitterHandles));
+	var handles = [];
 	var tweet = '';
 
 	function start() {
+	    handles = _.clone(_constants2.default.twitterHandles);
+	    handles = _.uniq(handles);
+	    handles = _.shuffle(handles);
+
 	    generateTweet();
 
 	    $('.twitter-tool-cta').on('click', function (e) {
@@ -5081,8 +5061,6 @@
 
 	function addHandlesToTweet(tweet) {
 	    var charactersLeft = 140 - getTweetLength(tweet);
-
-	    _utils2.default.shuffle(handles);
 
 	    var addedHandles = [];
 	    _.each(handles, function (handle) {

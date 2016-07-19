@@ -1,15 +1,19 @@
 import Constants from './constants';
 import StaticKit from './static-kit';
-import Utils from './utils';
+// import Utils from './utils';
 
 
 const patterns = {
     url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g,
 };
-let handles = JSON.parse(JSON.stringify(Constants.twitterHandles));
+let handles = [];
 let tweet = '';
 
 function start() {
+    handles = _.clone(Constants.twitterHandles);
+    handles = _.uniq(handles);
+    handles = _.shuffle(handles);
+
     generateTweet();
 
     $('.twitter-tool-cta').on('click', e => {
@@ -68,8 +72,6 @@ function getTweetLength(tweet) {
 
 function addHandlesToTweet(tweet) {
     let charactersLeft = 140 - getTweetLength(tweet);
-
-    Utils.shuffle(handles);
 
     const addedHandles = [];
     _.each(handles, handle => {
