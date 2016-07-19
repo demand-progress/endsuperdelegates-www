@@ -8,11 +8,10 @@ var FlipCounter = {
             dataType: 'jsonp',
         })
         .then(data => {
-            var wrapperEl = $('.action-wrapper');
-            if (!wrapperEl.hasClass('counter-is-visible')) {
+            var $wrapperEl = $('.action-wrapper');
+            if (!$wrapperEl.hasClass('counter-is-visible')) {
                 return;
             }
-
 
             var size = data.total.actions;
             var counterDestinationLength = size.toString().length;
@@ -27,8 +26,10 @@ var FlipCounter = {
                 tFH: 20,
             });
             counter.incrementTo(size, 1.6, 120);
-            var el = document.querySelector('#flip-counter');
-            el.style.width = counterDestinationLength * 30 + Math.floor((counterDestinationLength - 1) / 3) * 7 + 'px';
+            var $counter = $('#flip-counter');
+            $counter.css({
+                width: counterDestinationLength * 30 + Math.floor((counterDestinationLength - 1) / 3) * 7,
+            });
         });
     },
 };

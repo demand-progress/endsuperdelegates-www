@@ -2,7 +2,7 @@
 import Constants from './constants';
 import each from 'lodash/each';
 import Email from './email';
-// import FlipCounter from './flip-counter';
+import FlipCounter from './flip-counter';
 import Modal from './modal';
 import StaticKit from './static-kit';
 
@@ -13,8 +13,8 @@ function start() {
     $('[name=source]').val(StaticKit.query.cleanedSource);
     $('[name=url]').val(location.href);
 
-    // Disclaimer
-    updateDisclaimer();
+    // // Disclaimer
+    // updateDisclaimer();
 
     // Sticky form
     setupStickyForm();
@@ -22,8 +22,8 @@ function start() {
     // Signature form
     setupSignatureForm();
 
-    // // Counter
-    // FlipCounter.update(Constants.actionKitPage);
+    // Counter
+    updateCounter();
 }
 
 function setupStickyForm() {
@@ -144,6 +144,19 @@ function updateDisclaimer() {
 
     $('.disclaimer').css({ display: 'block' });
     $('.squaredFour').remove();
+}
+
+function updateCounter() {
+    $.ajax({
+        url: `https://act.demandprogress.org/progress/${Constants.actionKitPage}?callback=?`,
+        dataType: 'jsonp',
+    })
+    .then(data => {
+        var size = data.total.actions;
+        var sizeWithCommas = size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('.number-of-signatures').text(sizeWithCommas);
+        $('.counter').addClass('loaded');
+    });
 }
 
 export default {

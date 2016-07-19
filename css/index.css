@@ -202,7 +202,7 @@ header .headlines h1 a {
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
     margin: 0 auto;
     max-width: 310px;
-    padding: 24px 0 22px 0;
+    padding: 24px 0 0 0;
     position: relative;
     z-index: 99;
 }
@@ -378,9 +378,7 @@ header .headlines h1 a {
     margin: 8px auto -13px;
 }
 .action-wrapper .counter {
-    display: none;
-    background-color: #112347;
-    margin: 0 auto;
+    margin: auto;
     max-width: 413px;
     position: relative;
     z-index: 9;
@@ -394,23 +392,23 @@ header .headlines h1 a {
 }
 .action-wrapper .counter .number-of-signatures-label {
     clear: both;
-    color: #5c87d5;
+    color: #40bbff;
     font-size: 28px;
     font-weight: bold;
 }
 .action-wrapper .counter hr {
-    background-color: #1c366d;
+    background-color: #0a4f8e;
     border: none;
     height: 1px;
-    margin: 38px auto 0;
+    margin: 24px auto 0;
     max-width: 200px;
     width: 100%;
 }
-.action-wrapper .counter .label, .action-wrapper .counter .number-of-signatures {
+.action-wrapper .counter .number-of-signatures-label, .action-wrapper .counter .number-of-signatures {
     opacity: 0;
     transition: opacity .32s;
 }
-.action-wrapper .counter.loaded .label, .action-wrapper .counter.loaded .number-of-signatures {
+.action-wrapper .counter.loaded .number-of-signatures-label, .action-wrapper .counter.loaded .number-of-signatures {
     opacity: 1;
 }
 .action-wrapper .counter .signatures-needed {
