@@ -70,7 +70,7 @@
 
 	var _staticKit2 = _interopRequireDefault(_staticKit);
 
-	var _thanksPage = __webpack_require__(117);
+	var _thanksPage = __webpack_require__(116);
 
 	var _thanksPage2 = _interopRequireDefault(_thanksPage);
 
@@ -224,7 +224,7 @@
 	};
 
 	// Twitter Handles
-	constants.twitterHandles = ['@AceDblDwn', '@amyhoworth', '@ArevaMartin', '@AssemblymanWiz', '@AustinADavis24', '@Bakari_Sellers', '@BarneyFrank', '@berniesanders', '@BetsyButlerLA', '@cleo_fields', '@colleencondon', '@cynthiakouril', '@DavidPascrell', '@deboraburger', '@debwillig', '@DelegateDonna', '@demconvention', '@DoloresHuerta', '@DPM1000', '@DrJoseFMoreno', '@dupreeforgov', '@dwstweets', '@eianrobinson', '@ElderNewport', '@FollowSaifKhan', '@GMLaw_Tweets', '@GoIUPAT', '@GovJimHodges', '@govteacherscott', '@hillaryclinton', '@JacksonLeeTX18', '@JaneKim', '@javiermgonzales', '@jenhouse', '@joethepleb', '@josehuizar', '@JoshHodes', '@karen_olson', '@lateefahsimon', '@LauraTalmus', '@leticiavdp', '@lupedrick', '@Maggie_Kivvit', '@MariaTCardona', '@MichaelBColeman', '@michaeljtate', '@mikehtrujillo', '@om3', '@RachelLavine2', '@rbracy30', '@ReginaTMontoya', '@ReneeParadis', '@reshmasaujani', '@RobertDonat', '@ShefaliRazdan', '@staceyabrams', '@StephanieforSD', '@suemoravec', '@SusanEsserman', '@TMD_DallasComm', '@tmservo433', '@USinTT'];
+	constants.twitterHandles = ['@AceDblDwn', '@AmandaRenteria', '@amyhoworth', '@ArevaMartin', '@AssemblymanWiz', '@AustinADavis24', '@Bakari_Sellers', '@BarneyFrank', '@berniesanders', '@BetsyButlerLA', '@cleo_fields', '@colleencondon', '@cynthiakouril', '@DavidPascrell', '@deboraburger', '@debwillig', '@DelegateDonna', '@demconvention', '@DoloresHuerta', '@DPM1000', '@DrJoseFMoreno', '@dupreeforgov', '@dwstweets', '@eianrobinson', '@ElderNewport', '@FollowSaifKhan', '@GMLaw_Tweets', '@GoIUPAT', '@GovJimHodges', '@govteacherscott', '@GunnelsWarren', '@hillaryclinton', '@HumaAbedin', '@JacksonLeeTX18', '@JaneKim', '@janeosanders', '@javiermgonzales', '@jenhouse', '@joethepleb', '@johnpodesta', '@josehuizar', '@JoshHodes', '@karen_olson', '@lateefahsimon', '@LauraTalmus', '@leticiavdp', '@lupedrick', '@Maggie_Kivvit', '@MariaTCardona', '@mayaharris_', '@MichaelBColeman', '@michaeljtate', '@mikehtrujillo', '@om3', '@RachelLavine2', '@rbracy30', '@ReginaTMontoya', '@ReneeParadis', '@reshmasaujani', '@RobertDonat', '@ShefaliRazdan', '@staceyabrams', '@StephanieforSD', '@suemoravec', '@SusanEsserman', '@TMD_DallasComm', '@tmservo433', '@USinTT'];
 
 	exports.default = constants;
 
@@ -4972,8 +4972,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 116 */,
-/* 117 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
