@@ -53,6 +53,11 @@ $(f => {
             if (length < charactersLeft) {
                 tweet += addition;
                 charactersLeft -= length;
+
+                // Reducing frequency of smaller handles being added
+                if (charactersLeft < 8) {
+                    break;
+                }
             }
         }
 

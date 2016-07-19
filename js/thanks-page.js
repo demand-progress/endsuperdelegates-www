@@ -81,6 +81,11 @@ function addHandlesToTweet(tweet) {
             tweet += addition;
             charactersLeft -= length;
             addedHandles.push(handle);
+
+            // Reducing frequency of smaller handles being added
+            if (charactersLeft < 8) {
+                return false;
+            }
         }
     });
 

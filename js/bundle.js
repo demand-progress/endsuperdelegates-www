@@ -62,7 +62,7 @@
 
 	var _homePage2 = _interopRequireDefault(_homePage);
 
-	var _modal = __webpack_require__(115);
+	var _modal = __webpack_require__(117);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
@@ -70,7 +70,7 @@
 
 	var _staticKit2 = _interopRequireDefault(_staticKit);
 
-	var _thanksPage = __webpack_require__(116);
+	var _thanksPage = __webpack_require__(118);
 
 	var _thanksPage2 = _interopRequireDefault(_thanksPage);
 
@@ -121,6 +121,11 @@
 	            if (length < charactersLeft) {
 	                tweet += addition;
 	                charactersLeft -= length;
+
+	                // Reducing frequency of smaller handles being added
+	                if (charactersLeft < 8) {
+	                    break;
+	                }
 	            }
 	        }
 
@@ -1171,11 +1176,11 @@
 
 	var _email2 = _interopRequireDefault(_email);
 
-	var _flipCounter = __webpack_require__(117);
+	var _flipCounter = __webpack_require__(115);
 
 	var _flipCounter2 = _interopRequireDefault(_flipCounter);
 
-	var _modal = __webpack_require__(115);
+	var _modal = __webpack_require__(117);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
@@ -4907,92 +4912,6 @@
 
 /***/ },
 /* 115 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var Modal = {
-	    show: function show(modal) {
-	        var $modal = $(modal);
-
-	        $modal.css({
-	            display: 'table'
-	        });
-
-	        setTimeout(function (f) {
-	            $modal.removeClass('invisible');
-	        }, 50);
-	    },
-
-	    hide: function hide(modal) {
-	        var $modal = $(modal);
-
-	        $modal.addClass('invisible');
-
-	        setTimeout(function (f) {
-	            $modal.css({
-	                display: 'none'
-	            });
-	        }, 400);
-	    },
-
-	    wire: function wire(modal) {
-	        var $modal = $(modal);
-
-	        if ($modal.length === 0) {
-	            return;
-	        }
-
-	        $modal.find('.close').on('click', function (e) {
-	            e.preventDefault();
-
-	            Modal.hide(modal);
-	        });
-
-	        $modal.find('.gutter').on('click', function (e) {
-	            if (e.target !== e.currentTarget) {
-	                return;
-	            }
-
-	            e.preventDefault();
-
-	            Modal.hide(modal);
-	        });
-	    },
-
-	    resizeTimeout: null,
-
-	    onResize: function onResize(f) {
-	        clearTimeout(Modal.resizeTimeout);
-	        Modal.resizeTimeout = setTimeout(Modal.updateMaxHeight, 300);
-	    },
-
-	    updateMaxHeight: function updateMaxHeight(f) {
-	        $('.modal').css({
-	            'max-height': innerHeight + 'px'
-	        });
-	    },
-
-	    setup: function setup(f) {
-	        // Wire all modals
-	        $('.overlay').each(function (i, el) {
-	            Modal.wire(el);
-	        });
-
-	        // Update max-height on resize
-	        $(window).off('resize', Modal.onResize).on('resize', Modal.onResize);
-
-	        Modal.updateMaxHeight();
-	    }
-	};
-
-	exports.default = Modal;
-
-/***/ },
-/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5001,153 +4920,7 @@
 	    value: true
 	});
 
-	var _constants = __webpack_require__(2);
-
-	var _constants2 = _interopRequireDefault(_constants);
-
-	var _staticKit = __webpack_require__(3);
-
-	var _staticKit2 = _interopRequireDefault(_staticKit);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// import Utils from './utils';
-
-	var patterns = {
-	    url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g
-	};
-	var handles = [];
-	var tweet = '';
-
-	function start() {
-	    handles = _.clone(_constants2.default.twitterHandles);
-	    handles = _.uniq(handles);
-	    handles = _.shuffle(handles);
-
-	    generateTweet();
-
-	    $('.twitter-tool-cta').on('click', function (e) {
-	        e.preventDefault();
-
-	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
-	        window.open(url);
-
-	        generateTweet();
-	    });
-	}
-
-	function generateTweet() {
-	    // Congratulate
-	    if (handles.length === 0) {
-	        $('body').addClass('twitter-tool-completed');
-	        return;
-	    }
-
-	    // Update Tweet
-	    tweet = _constants2.default.tweet;
-	    tweet = addHandlesToTweet(tweet);
-
-	    // Update Preview
-	    var preview = addColorSpansToTweet(tweet);
-	    $('.twitter-tool .tweet').html(preview);
-
-	    // Animate
-	    var initialDelay = 100;
-	    var incrementalDelay = 50;
-	    $('.twitter-tool .tweet .handle').each(function (i, el) {
-	        $(el).css({
-	            'transition-delay': initialDelay + incrementalDelay * i + 'ms'
-	        });
-	    });
-	    $('.twitter-tool').removeClass('visible');
-	    setTimeout(function (f) {
-	        $('.twitter-tool').addClass('visible');
-	    }, 0);
-	}
-
-	function getTweetLength(tweet) {
-	    var length = tweet.length;
-
-	    // URLs cost 23 characters
-	    var urls = tweet.match(patterns.url);
-	    _.each(urls, function (url) {
-	        length -= url.length;
-	        length += 23;
-	    });
-
-	    return length;
-	}
-
-	function addHandlesToTweet(tweet) {
-	    var charactersLeft = 140 - getTweetLength(tweet);
-
-	    var addedHandles = [];
-	    _.each(handles, function (handle) {
-	        var addition = ' ' + handle;
-	        var length = addition.length;
-	        if (length < charactersLeft) {
-	            tweet += addition;
-	            charactersLeft -= length;
-	            addedHandles.push(handle);
-	        }
-	    });
-
-	    _.pullAll(handles, addedHandles);
-
-	    return tweet;
-	}
-
-	function addColorSpansToTweet(tweet) {
-	    tweet = tweet.replace(/#\w+/g, function (match) {
-	        return '<span class="blue">' + match + '</span>';
-	    });
-	    tweet = tweet.replace(/@\w+/g, function (match) {
-	        return '<span class="blue handle">' + match + '</span>';
-	    });
-	    tweet = tweet.replace(/https?:\/\/[\w.]+/g, function (match) {
-	        return '<span class="blue">' + match + '</span>';
-	    });
-	    return tweet;
-	}
-
-	function onTweetFormSubmit(e) {
-	    e.preventDefault();
-
-	    var tweet = '.@' + state.twitterIDs.join(' @') + ' ' + state.twitterText;
-
-	    var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
-
-	    window.open(url);
-
-	    // Show thanks
-	    var $submit = $('.tweet-wrapper button');
-	    $submit.addClass('thanks');
-	    $submit.text('Thanks!');
-
-	    // Send event
-	    ga('send', {
-	        hitType: 'event',
-	        eventCategory: 'ThanksPageTweet',
-	        eventAction: 'sent',
-	        eventLabel: _constants2.default.actionKitPage
-	    });
-	}
-
-	exports.default = {
-	    start: start
-	};
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _flipcounter = __webpack_require__(118);
+	var _flipcounter = __webpack_require__(116);
 
 	var _flipcounter2 = _interopRequireDefault(_flipcounter);
 
@@ -5188,7 +4961,7 @@
 	exports.default = FlipCounter;
 
 /***/ },
-/* 118 */
+/* 116 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5385,6 +5158,243 @@
 	   * Licensed under MIT
 	   * http://www.opensource.org/licenses/mit-license.php
 	   */
+
+/***/ },
+/* 117 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var Modal = {
+	    show: function show(modal) {
+	        var $modal = $(modal);
+
+	        $modal.css({
+	            display: 'table'
+	        });
+
+	        setTimeout(function (f) {
+	            $modal.removeClass('invisible');
+	        }, 50);
+	    },
+
+	    hide: function hide(modal) {
+	        var $modal = $(modal);
+
+	        $modal.addClass('invisible');
+
+	        setTimeout(function (f) {
+	            $modal.css({
+	                display: 'none'
+	            });
+	        }, 400);
+	    },
+
+	    wire: function wire(modal) {
+	        var $modal = $(modal);
+
+	        if ($modal.length === 0) {
+	            return;
+	        }
+
+	        $modal.find('.close').on('click', function (e) {
+	            e.preventDefault();
+
+	            Modal.hide(modal);
+	        });
+
+	        $modal.find('.gutter').on('click', function (e) {
+	            if (e.target !== e.currentTarget) {
+	                return;
+	            }
+
+	            e.preventDefault();
+
+	            Modal.hide(modal);
+	        });
+	    },
+
+	    resizeTimeout: null,
+
+	    onResize: function onResize(f) {
+	        clearTimeout(Modal.resizeTimeout);
+	        Modal.resizeTimeout = setTimeout(Modal.updateMaxHeight, 300);
+	    },
+
+	    updateMaxHeight: function updateMaxHeight(f) {
+	        $('.modal').css({
+	            'max-height': innerHeight + 'px'
+	        });
+	    },
+
+	    setup: function setup(f) {
+	        // Wire all modals
+	        $('.overlay').each(function (i, el) {
+	            Modal.wire(el);
+	        });
+
+	        // Update max-height on resize
+	        $(window).off('resize', Modal.onResize).on('resize', Modal.onResize);
+
+	        Modal.updateMaxHeight();
+	    }
+	};
+
+	exports.default = Modal;
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _constants = __webpack_require__(2);
+
+	var _constants2 = _interopRequireDefault(_constants);
+
+	var _staticKit = __webpack_require__(3);
+
+	var _staticKit2 = _interopRequireDefault(_staticKit);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import Utils from './utils';
+
+	var patterns = {
+	    url: /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/g
+	};
+	var handles = [];
+	var tweet = '';
+
+	function start() {
+	    handles = _.clone(_constants2.default.twitterHandles);
+	    handles = _.uniq(handles);
+	    handles = _.shuffle(handles);
+
+	    generateTweet();
+
+	    $('.twitter-tool-cta').on('click', function (e) {
+	        e.preventDefault();
+
+	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
+	        window.open(url);
+
+	        generateTweet();
+	    });
+	}
+
+	function generateTweet() {
+	    // Congratulate
+	    if (handles.length === 0) {
+	        $('body').addClass('twitter-tool-completed');
+	        return;
+	    }
+
+	    // Update Tweet
+	    tweet = _constants2.default.tweet;
+	    tweet = addHandlesToTweet(tweet);
+
+	    // Update Preview
+	    var preview = addColorSpansToTweet(tweet);
+	    $('.twitter-tool .tweet').html(preview);
+
+	    // Animate
+	    var initialDelay = 100;
+	    var incrementalDelay = 50;
+	    $('.twitter-tool .tweet .handle').each(function (i, el) {
+	        $(el).css({
+	            'transition-delay': initialDelay + incrementalDelay * i + 'ms'
+	        });
+	    });
+	    $('.twitter-tool').removeClass('visible');
+	    setTimeout(function (f) {
+	        $('.twitter-tool').addClass('visible');
+	    }, 0);
+	}
+
+	function getTweetLength(tweet) {
+	    var length = tweet.length;
+
+	    // URLs cost 23 characters
+	    var urls = tweet.match(patterns.url);
+	    _.each(urls, function (url) {
+	        length -= url.length;
+	        length += 23;
+	    });
+
+	    return length;
+	}
+
+	function addHandlesToTweet(tweet) {
+	    var charactersLeft = 140 - getTweetLength(tweet);
+
+	    var addedHandles = [];
+	    _.each(handles, function (handle) {
+	        var addition = ' ' + handle;
+	        var length = addition.length;
+	        if (length < charactersLeft) {
+	            tweet += addition;
+	            charactersLeft -= length;
+	            addedHandles.push(handle);
+
+	            // Reducing frequency of smaller handles being added
+	            if (charactersLeft < 8) {
+	                return false;
+	            }
+	        }
+	    });
+
+	    _.pullAll(handles, addedHandles);
+
+	    return tweet;
+	}
+
+	function addColorSpansToTweet(tweet) {
+	    tweet = tweet.replace(/#\w+/g, function (match) {
+	        return '<span class="blue">' + match + '</span>';
+	    });
+	    tweet = tweet.replace(/@\w+/g, function (match) {
+	        return '<span class="blue handle">' + match + '</span>';
+	    });
+	    tweet = tweet.replace(/https?:\/\/[\w.]+/g, function (match) {
+	        return '<span class="blue">' + match + '</span>';
+	    });
+	    return tweet;
+	}
+
+	function onTweetFormSubmit(e) {
+	    e.preventDefault();
+
+	    var tweet = '.@' + state.twitterIDs.join(' @') + ' ' + state.twitterText;
+
+	    var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet);
+
+	    window.open(url);
+
+	    // Show thanks
+	    var $submit = $('.tweet-wrapper button');
+	    $submit.addClass('thanks');
+	    $submit.text('Thanks!');
+
+	    // Send event
+	    ga('send', {
+	        hitType: 'event',
+	        eventCategory: 'ThanksPageTweet',
+	        eventAction: 'sent',
+	        eventLabel: _constants2.default.actionKitPage
+	    });
+	}
+
+	exports.default = {
+	    start: start
+	};
 
 /***/ }
 /******/ ]);
