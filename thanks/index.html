@@ -29,6 +29,28 @@
     <meta name="twitter:site" content="@demandprogress">
     <meta name="twitter:title" content="End Superdelegates">
     <meta name="twitter:url" content="https://endsuperdelegates.com/">
+
+    <script type="text/javascript">
+    // Redirect to custom after-action pages
+    (function() {
+        // Map
+        var redirects = {
+            dfa: 'https://secure.actblue.com/contribute/page/end-superdelegates',
+        };
+
+        // Source
+        var source = 'website';
+        try {
+            source = sessionStorage.savedSource;
+        } catch (e) {}
+        source = (source.split(/[^\w]/)[0]).toLowerCase();
+
+        // Redirect
+        if (redirects[source]) {
+            location.href = redirects[source];
+        }
+    })();
+    </script>
 </head>
 
 <body class="thanks-page" data-page="thanks">
