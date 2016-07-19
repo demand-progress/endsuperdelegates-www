@@ -1205,6 +1205,11 @@
 
 
 	function setupStickyForm() {
+	    if (navigator.userAgent.match(/mobile/i)) {
+	        $('body').addClass('mobile');
+	        return;
+	    }
+
 	    $(window).on('scroll resize', onScroll);
 	    $(window).on('resize', onResize);
 

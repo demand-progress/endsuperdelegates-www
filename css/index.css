@@ -252,7 +252,7 @@ header .headlines h1 a {
     .petition {
         font-size: 18px;
         margin: 0 auto;
-        max-width: 413px;
+        max-width: 720px;
         min-height: 0;
         padding: 38px 28px 32px;
     }
@@ -587,6 +587,9 @@ section .sign-the-petition {
 section .sign-the-petition:hover {
     background-color: #d01010;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.08);
+}
+body.mobile section .sign-the-petition {
+    display: block;
 }
 .share {
     border-radius: 60px;
