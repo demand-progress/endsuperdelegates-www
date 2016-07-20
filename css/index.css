@@ -1248,6 +1248,10 @@ body .twitter-tool .button:hover {
     background-color: #3089ef;
 }
 
+body .shows-on-twitter-tool-completion {
+    display: none;
+}
+
 body.twitter-tool-completed .shows-on-twitter-tool-completion {
     display: initial;
 }
